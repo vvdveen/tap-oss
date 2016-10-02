@@ -1,0 +1,18 @@
+
+- build-avd-gapps.sh
+Script for generating a new Android Virtual Device (AVD) that can be used by
+the emudroid library. This script installs the Google Maps API on the latest
+system image found in the android source trunk and will create a new system
+image out of this.
+
+- build-avd.sh
+Script for generating a new Android Virtual Device (AVD) that can be used by
+the emudroid library. This script assumes that there is already a system image
+with the Google Maps API installed available.
+
+- mkfs.yaffs2.arm
+Binary used by build-avd-gapps.sh to dump a new system image
+
+- process_logs.py
+Python script that can process batch analysis results.
+

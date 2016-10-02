@@ -1,0 +1,61 @@
+This is a clone of the CyanogenMod su binary repository. It was changed so that
+every app will be granted root permission without question.
+
+To compile the binary, the following steps are required (assuming that the
+android-source trunk is available in /android-source):
+
+    source /android-source/envsetup.sh
+    TOP=/android-source/
+    mm -B
+
+The new ARM binary will be available in:
+
+    /android-source/out/target/product/generic/system/xbin/su
+
+
+To install the new su binary:
+
+    adb shell mount -o rw,remount /system /system
+    adb push /android-source/out/target/product/generic/system/xbin/su /system/xbin/su
+    adb shell chmod 6755 /system/xbin/su
+    adb shell mount -o ro,remount /system /system
+
+Note that the scripts of this platform expect a su binary in the current
+directory. If you made changes to the sources in this directory, make sure you
+copy the fresh binary in here before generating a new image
+(build-avd-gapps.sh) or using the install_su() command via emudroid.py.
+
+    cp /android-source/out/target/produc/generic/system/xbin/su .
+
+
+The SU app in lib/apps/SU demonstrates how you can now execute commands as
+root.
+
+Note that an important difference between the official Android su binary and
+the CyanogenMod su binary is the lack of a -c option in the Android one.
+
+
+
+
+
+
+
+This is the su binary for Superuser on Android.
+
+Any app that requires root access must call this binary in order to be given root access.
+
+Branches for this repo support the following Android versions:
+
+ - legacy
+   - cupcake
+   - donut
+
+ - master
+   - eclair
+   - froyo
+   - gingerbread
+   - honeycomb*
+
+Branches marked with '-dev' are in work and should probably not be used. I will push to those channels as I develop new versions so they may be broken from time to time.
+
+* I have yet to personally test superuser on any honeycomb devices, therefore I cannot guarantee it's compatibility
